@@ -7,11 +7,13 @@ public class Location {
     private String name;
     private String address;
     private List<DisasterVictim> occupants;
-    private List<Supply> supplies;
+    private ArrayList<Supply> supplies;
 
     public Location(String name, String address) {
         this.name = name;
         this.address = address;
+        this.supplies = new ArrayList<>();
+        this.occupants = new ArrayList<>();
     }
 
     public String getName() {
@@ -23,7 +25,7 @@ public class Location {
     public List<DisasterVictim> getOccupants() {
         return occupants;
     }
-    public List<Supply> getSupplies() {
+    public ArrayList<Supply> getSupplies() {
         return supplies;
     }
 
@@ -39,7 +41,7 @@ public class Location {
         this.occupants = occupants;
     }
 
-    public void setSupplies(List<Supply> supplies) {
+    public void setSupplies(ArrayList<Supply> supplies) {
         this.supplies = supplies;
     }
 

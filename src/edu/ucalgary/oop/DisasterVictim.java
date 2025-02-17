@@ -12,17 +12,17 @@ public class DisasterVictim {
     private String gender;
     private String comments;
     private static int counter = 10000;
-    private List<FamilyRelation> familyConnections;
-    private List<Supply> personalBelongings;
-    private ArrayList<MedicalRecord> medicalRecords;
+    private FamilyRelation[] familyConnections;
+    private Supply[] personalBelongings;
+    private MedicalRecord[] medicalRecords;
 
     public DisasterVictim(String firstName, String ENTRY_DATE) {
         this.firstName = firstName;
         this.ENTRY_DATE = ENTRY_DATE;
         this.ASSIGNED_SOCIAL_ID = counter++;
-        this.familyConnections = new ArrayList<>();
-        this.personalBelongings = new ArrayList<>();
-        this.medicalRecords = new ArrayList<>();
+        this.familyConnections = new FamilyRelation[10];
+        this.personalBelongings = new Supply[10];
+        this.medicalRecords = new MedicalRecord[10];
 
     }
 
@@ -31,9 +31,9 @@ public class DisasterVictim {
         this.ENTRY_DATE = ENTRY_DATE;
         this.dateOfBirth = dateOfBirth;
         this.ASSIGNED_SOCIAL_ID = counter++;
-        this.familyConnections = new ArrayList<>();
-        this.personalBelongings = new ArrayList<>();
-        this.medicalRecords = new ArrayList<>();
+        this.familyConnections = new FamilyRelation[10];
+        this.personalBelongings = new Supply[10];
+        this.medicalRecords = new MedicalRecord[10];
 
     }
 
@@ -46,9 +46,9 @@ public class DisasterVictim {
     public String getComments() {return comments;}
     public int getAssignedSocialID() {return ASSIGNED_SOCIAL_ID;}
     public String getEntryDate() {return ENTRY_DATE;}
-    public List<FamilyRelation> getFamilyConnections() {return familyConnections;}
-    public List<Supply> getPersonalBelongings() {return personalBelongings;}
-    public ArrayList<MedicalRecord> getMedicalRecords() {return medicalRecords;}
+    public FamilyRelation[] getFamilyConnections() {return familyConnections;}
+    public Supply[] getPersonalBelongings() {return personalBelongings;}
+    public MedicalRecord[] getMedicalRecords() {return medicalRecords;}
 
 
 
@@ -58,38 +58,100 @@ public class DisasterVictim {
     public void setDateOfBirth(String dateOfBirth) {this.dateOfBirth = dateOfBirth;}
     public void setGender(String gender) {this.gender = gender;}
     public void setComments(String comments) {this.comments = comments;}
-    public void setPersonalBelongings(List<Supply> personalBelongings) {
+    public void setPersonalBelongings(Supply[] personalBelongings) {
         this.personalBelongings = personalBelongings;
     }
-    public void setMedicalRecords(ArrayList<MedicalRecord> medicalRecords) {
+    public void setMedicalRecords(MedicalRecord[] medicalRecords) {
         this.medicalRecords = medicalRecords;
     }
-    public void setFamilyConnections(List<FamilyRelation> familyConnections) {
+    public void setFamilyConnections(FamilyRelation[] familyConnections) {
         this.familyConnections = familyConnections;
     }
 
 
     public void addPersonalBelonging(Supply newSupply) {
-        personalBelongings.add(newSupply);
+        int null_index = -1;
+        for (int i = 0; i < personalBelongings.length; i++) {
+            if (personalBelongings[i] == null) {
+                null_index = i;
+                break;
+            }
+        }
+        if (null_index == -1) {
+            Supply[] newPersonalBelongings = new Supply[personalBelongings.length + 1];
+            System.arraycopy(personalBelongings, 0, newPersonalBelongings, 0, personalBelongings.length);
+            personalBelongings = newPersonalBelongings;
+
+            personalBelongings[personalBelongings.length - 1] = newSupply;
+        }
+
+        else {
+            personalBelongings[null_index] = newSupply;
+        }
+
+
+
+
+
     }
 
     public void addMedicalRecord(MedicalRecord newMedicalRecord) {
-        medicalRecords.add(newMedicalRecord);
+        int null_index = -1;
+        for (int i = 0; i < medicalRecords.length; i++) {
+            if (medicalRecords[i] == null) {
+                null_index = i;
+                break;
+            }
+        }
+        if (null_index == -1) {
+            MedicalRecord[] newMedicalRecords = new MedicalRecord[medicalRecords.length + 1];
+            System.arraycopy(medicalRecords, 0, newMedicalRecords, 0, medicalRecords.length);
+            medicalRecords = newMedicalRecords;
+            medicalRecords[medicalRecords.length - 1] = newMedicalRecord;
+        }
+        else {
+            medicalRecords[null_index] = newMedicalRecord;
+        }
+
     }
 
     public void addFamilyConnection(FamilyRelation newFamilyConnection) {
-        familyConnections.add(newFamilyConnection);
+        int null_index = -1;
+        for (int i = 0; i < familyConnections.length; i++) {
+            if (familyConnections[i] == null) {
+                null_index = i;
+            }
+        }
+        if (null_index == -1) {
+            FamilyRelation[] newFamilyConnections = new FamilyRelation[familyConnections.length + 1];
+            System.arraycopy(familyConnections, 0, newFamilyConnections, 0, familyConnections.length);
+            familyConnections = newFamilyConnections;
+            familyConnections[familyConnections.length - 1] = newFamilyConnection;
+        }
+        else {
+            familyConnections[null_index] = newFamilyConnection;
+        }
+
     }
 
 
     public void removeFamilyConnection(FamilyRelation exFamilyConnection) {
-        familyConnections.remove(exFamilyConnection);
+        for (int i = 0; i < familyConnections.length; i++) {
+            if (familyConnections[i] == exFamilyConnection) {
+                familyConnections[i] = null;
+            }
+        }
+
     }
 
     public void removePersonalBelonging(Supply exSupply) {
-        personalBelongings.remove(exSupply);
-    }
+        for (int i = 0; i < personalBelongings.length; i++) {
+            if (personalBelongings[i] == exSupply) {
+                personalBelongings[i] = null;
+            }
+        }
 
+    }
 
 
 
