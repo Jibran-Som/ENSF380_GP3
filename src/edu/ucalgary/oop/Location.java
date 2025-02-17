@@ -17,23 +17,20 @@ public class Location {
     public String getName() {
         return name;
     }
-
     public String getAddress() {
         return address;
     }
-
     public List<DisasterVictim> getOccupants() {
         return occupants;
     }
-
-    public List<Supply> getSuppliers() {
+    public List<Supply> getSupplies() {
         return supplies;
     }
+
 
     public void setName(String name) {
         this.name = name;
     }
-
     public void setAddress(String address) {
         this.address = address;
     }
@@ -42,23 +39,23 @@ public class Location {
         this.occupants = occupants;
     }
 
-    public void setSuppliers(List<Supply> supplies) {
+    public void setSupplies(List<Supply> supplies) {
         this.supplies = supplies;
     }
 
     public void addOccupant(DisasterVictim occupant) {
-        this.occupants.add(occupant);
+        occupants.add(occupant);
     }
 
-    public void addSupplier(Supply supplier) {
-        this.supplies.add(supplier);
+    public void addSupply(Supply supply) {
+        supplies.add(supply);
     }
 
     public void removeOccupant(DisasterVictim occupant) {
-        this.occupants.remove(occupant);
+        occupants.remove(occupant);
     }
 
-    public void removeSupplier(Supply supplier) {
-        this.supplies.remove(supplier);
+    public void removeSupply(Supply supply) {
+        supplies.remove(supply);
     }
 }
