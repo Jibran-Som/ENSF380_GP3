@@ -17,6 +17,9 @@ public class DisasterVictim {
     private MedicalRecord[] medicalRecords;
 
     public DisasterVictim(String firstName, String ENTRY_DATE) {
+        if(!(isValidDateFormat(ENTRY_DATE))) {
+            throw new IllegalArgumentException("Invalid date format");
+        }
         this.firstName = firstName;
         this.ENTRY_DATE = ENTRY_DATE;
         this.ASSIGNED_SOCIAL_ID = counter++;
@@ -27,6 +30,15 @@ public class DisasterVictim {
     }
 
     public DisasterVictim(String firstName, String ENTRY_DATE, String dateOfBirth) {
+        if(!(isValidDateFormat(ENTRY_DATE))) {
+            throw new IllegalArgumentException("Invalid date format");
+        }
+        if(!(isValidDateFormat(dateOfBirth))) {
+            throw new IllegalArgumentException("Invalid date format");
+        }
+        if(convertDateStringToInt(dateOfBirth) > convertDateStringToInt(ENTRY_DATE)) {
+            throw new IllegalArgumentException("Invalid Entry Date");
+        }
         this.firstName = firstName;
         this.ENTRY_DATE = ENTRY_DATE;
         this.dateOfBirth = dateOfBirth;
@@ -55,7 +67,11 @@ public class DisasterVictim {
 
     public void setFirstName(String firstName) {this.firstName = firstName;}
     public void setLastName(String lastName) {this.lastName = lastName;}
-    public void setDateOfBirth(String dateOfBirth) {this.dateOfBirth = dateOfBirth;}
+    public void setDateOfBirth(String dateOfBirth) {
+        if(!(isValidDateFormat(dateOfBirth))) {
+            throw new IllegalArgumentException("Invalid date format");
+        }
+        this.dateOfBirth = dateOfBirth;}
     public void setGender(String gender) {this.gender = gender;}
     public void setComments(String comments) {this.comments = comments;}
     public void setPersonalBelongings(Supply[] personalBelongings) {
@@ -152,6 +168,58 @@ public class DisasterVictim {
         }
 
     }
+
+    private static boolean isValidDateFormat(String date) {
+        if (date == null || date.length() != 10) {
+            return false;
+        }
+
+        if (date.charAt(4) != '-' || date.charAt(7) != '-') {
+            return false;
+        }
+
+        String yearStr = date.substring(0, 4);
+        String monthStr = date.substring(5, 7);
+        String dayStr = date.substring(8, 10);
+
+
+        int year = Integer.parseInt(yearStr);
+        int month = Integer.parseInt(monthStr);
+        int day = Integer.parseInt(dayStr);
+
+        if (month < 1 || month > 12) {
+            return false;
+        }
+
+        if (day < 1 || day > 31) {
+            return false;
+        }
+
+        if(year < 1900 || year > 2026) {
+            return false;
+        }
+
+        return true;
+
+    }
+
+    private static int convertDateStringToInt(String dateStr){
+
+        String yearStr = dateStr.substring(0, 4);
+        String monthStr = dateStr.substring(5, 7);
+        String dayStr = dateStr.substring(8, 10);
+
+
+        int year = Integer.parseInt(yearStr);
+        int month = Integer.parseInt(monthStr);
+        int day = Integer.parseInt(dayStr);
+
+        return year * 10000 + month * 100 + day;
+
+    }
+
+
+
 
 
 
