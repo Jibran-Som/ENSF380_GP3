@@ -22,7 +22,7 @@ public class DisasterVictim {
         }
         this.firstName = firstName;
         this.ENTRY_DATE = ENTRY_DATE;
-        this.ASSIGNED_SOCIAL_ID = counter++;
+        this.ASSIGNED_SOCIAL_ID = generateSocialID();
         this.familyConnections = new FamilyRelation[10];
         this.personalBelongings = new Supply[10];
         this.medicalRecords = new MedicalRecord[10];
@@ -42,7 +42,7 @@ public class DisasterVictim {
         this.firstName = firstName;
         this.ENTRY_DATE = ENTRY_DATE;
         this.dateOfBirth = dateOfBirth;
-        this.ASSIGNED_SOCIAL_ID = counter++;
+        this.ASSIGNED_SOCIAL_ID = generateSocialID();
         this.familyConnections = new FamilyRelation[10];
         this.personalBelongings = new Supply[10];
         this.medicalRecords = new MedicalRecord[10];
@@ -216,6 +216,10 @@ public class DisasterVictim {
 
         return year * 10000 + month * 100 + day;
 
+    }
+    
+    private static int generateSocialID() {
+    	return counter++;
     }
 
 
