@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Location {
     private String name;
     private String address;
-    private List<DisasterVictim> occupants;
+    private ArrayList<DisasterVictim> occupants;
     private ArrayList<Supply> supplies;
 
     public Location(String name, String address) {
@@ -22,7 +22,7 @@ public class Location {
     public String getAddress() {
         return address;
     }
-    public List<DisasterVictim> getOccupants() {
+    public ArrayList<DisasterVictim> getOccupants() {
         return occupants;
     }
     public ArrayList<Supply> getSupplies() {
@@ -37,7 +37,7 @@ public class Location {
         this.address = address;
     }
 
-    public void setOccupants(List<DisasterVictim> occupants) {
+    public void setOccupants(ArrayList<DisasterVictim> occupants) {
         this.occupants = occupants;
     }
 
